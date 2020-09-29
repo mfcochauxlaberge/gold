@@ -1,6 +1,6 @@
 # gold
 
-gold is a small library to manage goldenfiles in a test suite.
+gold is a small library to manage golden files in a test suite.
 
 ## Dependencies
 
