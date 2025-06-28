@@ -12,7 +12,9 @@ import (
 func TestNewRunner(t *testing.T) {
 	assert := assert.New(t)
 
-	runner := NewRunner("some/path")
+	runner := Runner{
+		Directory: "some/path",
+	}
 	assert.Equal(false, runner.Update)
 	assert.Equal("some/path", runner.Directory)
 	assert.Len(runner.Filters, 0)
@@ -34,7 +36,9 @@ func TestRunnerPrepare(t *testing.T) {
 	assert.Equal(1, len(files))
 
 	// Create runner and prepare it.
-	runner := NewRunner(dir)
+	runner := Runner{
+		Directory: dir,
+	}
 
 	// Nothing happens here because
 	// update mode is disabled.
@@ -65,8 +69,10 @@ func TestRunnerTest(t *testing.T) {
 	assert.NoError(err)
 
 	// Create runner and prepare it.
-	runner := NewRunner(dir)
-	runner.Update = true
+	runner := Runner{
+		Directory: dir,
+		Update:    true,
+	}
 
 	err = runner.Prepare()
 	assert.NoError(err)
@@ -98,8 +104,10 @@ func TestRunnerWithFilter(t *testing.T) {
 	assert.NoError(err)
 
 	// Create runner and prepare it.
-	runner := NewRunner(dir)
-	runner.Update = true
+	runner := Runner{
+		Directory: dir,
+		Update:    true,
+	}
 
 	err = runner.Prepare()
 	assert.NoError(err)
@@ -126,8 +134,11 @@ func TestRunnerTestComparisonError(t *testing.T) {
 	assert.NoError(err)
 
 	// Create runner and prepare it.
-	runner := NewRunner(dir)
-	runner.Update = true
+	runner := Runner{
+		Directory: dir,
+		Update:    true,
+	}
+
 	err = runner.Prepare()
 	assert.NoError(err)
 

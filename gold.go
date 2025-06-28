@@ -2,40 +2,13 @@ package gold
 
 import (
 	"bytes"
-	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 )
 
-var update = flag.Bool("update", false, "update the golden files")
-
-// NewRunner returns a *Runner.
-//
-// dir defines the Runner's directory, which is where all the files will be
-// stored. A good option is a directory inside testdata.
-//
-// IMPORTANT: that directory will be managed by the library and anything in it
-// can be deleted.
-//
-// The update flag is parsed and its value will be used by the runner. To
-// override this setting, set the Update field on the returned *Runner.
-//
-// NewRunner calls flag.Parse.
-func NewRunner(dir string) *Runner {
-	// TODO Should this be called here? Maybe let
-	// the user call it when appropriate.
-	flag.Parse()
-
-	return &Runner{
-		Update:    *update,
-		Directory: dir,
-	}
-}
-
-// A Runner stores context information when handling the generated outputs and
-// the outputs stored in files.
+// A Runner stores the configuration for the golden file runner.
 type Runner struct {
 	// Update reports whether or not the runner
 	// must run in update mode. If it is the
